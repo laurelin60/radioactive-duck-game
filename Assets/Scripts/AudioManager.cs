@@ -5,14 +5,22 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public AudioSource musicSource;
+    public AudioSource SFX;
     public AudioClip background;
+    public AudioClip soundClip;
 
     private void Awake(){
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    public void HitDuck(){
+        SFX.clip = soundClip;
+        SFX.Play();
+    }
+
+    void Start()
     {
+        GameManager.OnDuckShot += HitDuck;
         musicSource.clip = background;
         musicSource.Play();
     }
