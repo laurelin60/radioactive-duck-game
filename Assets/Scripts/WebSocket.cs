@@ -33,6 +33,11 @@ public class WebSocketClient : MonoBehaviour
         GameManager.OnFinish += SendGameEnd;
     }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+    
     private void OnDestroy()
     {
         _ws?.Close();
