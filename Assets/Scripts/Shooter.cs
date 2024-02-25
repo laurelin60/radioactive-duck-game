@@ -6,7 +6,7 @@ public class Shooter : MonoBehaviour
 {
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && GameManager.ShootDuck != null)
         {
             GameManager.ShootDuck();
         }
