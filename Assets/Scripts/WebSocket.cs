@@ -27,6 +27,11 @@ public class WebSocketClient : MonoBehaviour
         _ws.OnClose += OnClose;
 
         _ws.Connect();
+
+        GameManager.OnStartGame += SendGameStart;
+        GameManager.OnDuckFlyAway += SendNextLetter;
+        GameManager.OnDuckShot += () => Invoke(nameof(SendNextLetter), 1f);
+        GameManager.OnFinish += SendGameEnd;
     }
 
     private void OnDestroy()
@@ -90,14 +95,18 @@ public class WebSocketClient : MonoBehaviour
                     break;
             }
 
-            SetCircleColor(Color.yellow);
-            // Reset circle color after 0.25 second
-            Invoke(nameof(ResetCircleColor), 0.25f);
+            SocketTransferIndicator();
         }
         catch (System.Exception ex)
         {
             Debug.LogError("Failed to parse WebSocket message: " + ex.Message);
         }
+    }
+
+    private void SocketTransferIndicator()
+    {
+        SetCircleColor(Color.yellow);
+        Invoke(nameof(ResetCircleColor), 0.25f);
     }
 
     private void SetCircleColor(Color color)
@@ -112,6 +121,38 @@ public class WebSocketClient : MonoBehaviour
 
     private void ResetCircleColor()
     {
-        SetCircleColor(Color.green);
+        SetCircleColor(_ws.IsAlive ? Color.green : Color.red);
+    }
+
+    public void SendGameStart()
+    {
+        var message = new Dictionary<string, string>
+        {
+            { "type", "gameStart" }, { "id", _clientId }
+        };
+        var json = JsonConvert.SerializeObject(message);
+        _ws.Send(json);
+    }
+
+    public void SendGameEnd()
+    {
+        var message = new Dictionary<string, string>
+        {
+            { "type", "gameEnd" }, { "id", _clientId }
+        };
+        var json = JsonConvert.SerializeObject(message);
+
+        _ws.Send(json);
+    }
+
+    private void SendNextLetter()
+    {
+        var message = new Dictionary<string, string>
+        {
+            { "type", "nextLetter" }, { "id", _clientId }
+        };
+        var json = JsonConvert.SerializeObject(message);
+
+        _ws.Send(json);
     }
 }
