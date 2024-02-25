@@ -11,7 +11,6 @@ public class DirectionChanger : MonoBehaviour
     {
         if(hit.transform.tag == "Duck")
         {
-            // create duck movement variable and assign using getcomponentof hit
             DuckMovement duck = hit.gameObject.GetComponent<DuckMovement>();
 
             if(changer == DirChanger.Horizontal)
