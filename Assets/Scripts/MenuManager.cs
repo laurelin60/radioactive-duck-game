@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class MenuManager : MonoBehaviour
 {
-    public void LoadLevel(string _name)
+    public void LoadLevel(string sceneName)
     {
-        Application.LoadLevel(_name);
+        SceneManager.LoadScene(sceneName);
     }
 }

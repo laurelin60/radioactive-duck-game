@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,42 +20,48 @@ public class GameManager : MonoBehaviour
     private int currentDuck;
 
     public int scoreAmt;
-    private int score; 
+    private int score;
 
-//     void Start()
-//     {
-//         score = 0;
-//         currentDuck = 0;
+    void Start()
+    {
+        score = 0;
+        currentDuck = -1;
 
-//         SetScore();
+        SetScore(score);
 
-//     }
+        OnDuckShot += IncrementScore;
+        OnDuckShot += IncrementDucks;
+        OnSpawnDucks += IncrementDucks;
+    }
 
-//    public void IncrementDucks() 
-//    {
-//         if (currentDuck < MaxDucks)
-//         {
-//             currentDuck++;
-//         }
-//         else if(currentDuck >= MaxDucks)
-//         {
-//             OnFinish();
-//         }
-//    }
+   public void IncrementDucks() 
+   {
+        if (currentDuck < MaxDucks)
+        {
+            currentDuck++;
+            Debug.Log($"DUCKS LEFT: {MaxDucks - currentDuck}");
+        }
+        else if(currentDuck >= MaxDucks)
+        {
+            OnFinish();
+        }
+   }
 
-//    public void SetScore(int _score)
-//    {
-//         score.text = _score.toString();
-//    }
+   public void SetScore(int newScore)
+   {
+        score = newScore;
+   }
 
-//     private void IncrementScore()
-//     {
-//         score += scoreAmt;
-//     }
+    private void IncrementScore()
+    {
+        score += scoreAmt;
+        SetGUIScore(score);
+    }
 
-//    private void SetScore()
-//    {
-//         manager.SetScore(score);
-//    }
+   private void SetGUIScore(int newScore)
+   {
+        Debug.Log($"NEW SCORE: {newScore}");
+        manager.SetScore(newScore);
+   }
 
 }

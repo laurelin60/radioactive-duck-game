@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GUIManager : MonoBehaviour
 {
     //public text called score
+    public Text score;
 
     void Start()
     {
@@ -16,5 +17,11 @@ public class GUIManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetScore(int newScore)
+    {
+        Debug.Log(newScore);
+        score.text = "score: " + newScore;
     }
 }
