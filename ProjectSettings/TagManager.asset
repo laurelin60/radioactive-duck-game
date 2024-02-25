@@ -6,17 +6,18 @@ TagManager:
   tags:
   - KillZoneTag
   - Duck
+  - FlyZone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Foreground
   - Water
   - UI
+  - Duck
   - 
   - 
-  - 
-  - 
+  - Background
   - 
   - 
   - 
@@ -42,4 +43,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3463341821
+    locked: 0
+  - name: Duck
+    uniqueID: 1542525531
+    locked: 0
+  - name: Foreground
+    uniqueID: 3379740515
+    locked: 0
+  - name: DogFront
+    uniqueID: 3927055385
+    locked: 0
+  - name: DogBack
+    uniqueID: 3317074963
     locked: 0

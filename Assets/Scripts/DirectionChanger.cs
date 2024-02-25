@@ -7,6 +7,13 @@ public class DirectionChanger : MonoBehaviour
     public enum DirChanger {Horizontal, Vertical};
     public DirChanger changer;
 
+    void Start()
+    {
+        GameManager.OnDuckShot += TurnOff;
+        GameManager.OnDuckMiss += TurnOff;
+        GameManager.OnSpawnDucks += TurnOn;
+    }
+
     void OnCollisionEnter(Collision hit)
     {
         if(hit.transform.tag == "Duck")
@@ -23,4 +30,13 @@ public class DirectionChanger : MonoBehaviour
             }
         }
     } 
+    
+    public void TurnOff()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void TurnOn(){
+        gameObject.SetActive(true);
+    }
 }
