@@ -28,9 +28,8 @@ public class WebSocketClient : MonoBehaviour
 
         _ws.Connect();
 
-        GameManager.OnStartGame += SendGameStart;
-        GameManager.OnDuckFlyAway += SendNextLetter;
-        GameManager.OnDuckShot += () => Invoke(nameof(SendNextLetter), 1f);
+        GameManager.OnDuckFlyAway += () => Invoke(nameof(SendNextLetter), 1f);
+        GameManager.OnDuckShot += () => Invoke(nameof(SendNextLetter), 2f);
         GameManager.OnFinish += SendGameEnd;
     }
 
@@ -52,6 +51,8 @@ public class WebSocketClient : MonoBehaviour
         Debug.Log("WebSocket connection opened");
         // Set circle color to green when WebSocket is connected
         SetCircleColor(Color.green);
+        
+        Invoke(nameof(SendGameStart), 2.5f);
     }
 
     private void OnMessage(object sender, MessageEventArgs e)
@@ -86,8 +87,8 @@ public class WebSocketClient : MonoBehaviour
             switch (json["type"])
             {
                 case "id":
-                    Debug.Log("Set Client ID: " + _clientId);
                     _clientId = json["id"];
+                    Debug.Log("Set Client ID: " + _clientId);
                     break;
                 case "killDuck":
                     Debug.Log("Received killDuck message");
@@ -106,7 +107,7 @@ public class WebSocketClient : MonoBehaviour
     private void SocketTransferIndicator()
     {
         SetCircleColor(Color.yellow);
-        Invoke(nameof(ResetCircleColor), 0.25f);
+        Invoke(nameof(ResetCircleColor), 0.5f);
     }
 
     private void SetCircleColor(Color color)
@@ -124,17 +125,19 @@ public class WebSocketClient : MonoBehaviour
         SetCircleColor(_ws.IsAlive ? Color.green : Color.red);
     }
 
-    public void SendGameStart()
+    private void SendGameStart()
     {
+        Debug.Log("Sending gameStart message to server");
         var message = new Dictionary<string, string>
         {
             { "type", "gameStart" }, { "id", _clientId }
         };
         var json = JsonConvert.SerializeObject(message);
         _ws.Send(json);
+        SocketTransferIndicator();
     }
 
-    public void SendGameEnd()
+    private void SendGameEnd()
     {
         var message = new Dictionary<string, string>
         {
@@ -143,6 +146,7 @@ public class WebSocketClient : MonoBehaviour
         var json = JsonConvert.SerializeObject(message);
 
         _ws.Send(json);
+        SocketTransferIndicator();
     }
 
     private void SendNextLetter()
@@ -154,5 +158,6 @@ public class WebSocketClient : MonoBehaviour
         var json = JsonConvert.SerializeObject(message);
 
         _ws.Send(json);
+        SocketTransferIndicator();
     }
 }
