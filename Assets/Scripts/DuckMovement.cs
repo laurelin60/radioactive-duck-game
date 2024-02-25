@@ -10,9 +10,13 @@ public class DuckMovement : MonoBehaviour
     private int bounce;
     public int bounceMax;
 
+    Animator anim;
+
 
     void Start()
     {
+        anim = GetComponent<Animator>();
+
         GameManager.OnDuckShot += StopMovement;
         GameManager.OnDuckMiss += FlyAway;
         RandomDirection();
@@ -25,13 +29,13 @@ public class DuckMovement : MonoBehaviour
 
     public void RandomDirection()
     {
-        direction = new Vector3(Random.Range(-1f, 1f), Random.Range(.4f, 1f), 0);
+        direction = new Vector3(Random.Range(-1f, 1f), Random.Range(.4f, .7f), 0);
+        ChangeAnimation();
     }
 
     public void DirectionChanger(Vector3 _dir)
     {
         direction = new Vector3(direction.x * _dir.x, direction.y * _dir.y, 0);
-
         bounce++;
 
         if(bounce >= bounceMax)
@@ -39,6 +43,7 @@ public class DuckMovement : MonoBehaviour
             direction = new Vector3(0, 1, 0);
             GameManager.OnDuckMiss();
         }
+        ChangeAnimation();
     }
 
     public void StopMovement()
@@ -54,5 +59,29 @@ public class DuckMovement : MonoBehaviour
     public void FlyAway()
     {
         direction = new Vector3(0, 1, 0);
+    }
+
+    private void ChangeAnimation()
+    {
+        if (direction.x < .5f && direction.x > 0f)
+        {
+            anim.Play("DuckFlyUpRight");
+        }
+        else if (direction.x > -.5f && direction.x < 0f)
+        {
+            anim.Play("DuckFlyUpLeft");
+        }
+        else if (direction.x < 1f && direction.x > .5f)
+        {
+            anim.Play("DuckFlySideRight");
+        }
+        else if (direction.x > -1f && direction.x < -.5f)
+        {
+            anim.Play("DuckFlySideLeft");
+        }
+        else if (direction.x == 0 && direction.y == 1)
+        {
+            anim.Play("DuckFlyAway");
+        }
     }
 }
