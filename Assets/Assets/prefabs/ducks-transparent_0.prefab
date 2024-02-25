@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 7952125776114091859}
   - component: {fileID: 5175587905886875605}
   - component: {fileID: 2343002634043232830}
-  - component: {fileID: 1278369812033050236}
   - component: {fileID: 455544294460697729}
   - component: {fileID: 5225144101728486526}
+  - component: {fileID: 8555568158211211226}
   m_Layer: 0
   m_Name: ducks-transparent_0
-  m_TagString: Untagged
+  m_TagString: Duck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,18 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e6656fd61eb44d4aa97fcf9b679b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1278369812033050236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2316888639671517601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78e6656fd61eb44d4aa97fcf9b679b20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &455544294460697729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -160,3 +148,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &8555568158211211226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316888639671517601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0e62b42e3b64674993758e4eb9e4d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  direction: {x: 0, y: 0, z: 0}
