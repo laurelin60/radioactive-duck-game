@@ -13,12 +13,6 @@ public class DogControl : MonoBehaviour
         GameManager.OnDuckFlyAway += PlayLaugh;
     }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
-
     public void SpawnDucks()
     {
         GameManager.OnSpawnDucks();
