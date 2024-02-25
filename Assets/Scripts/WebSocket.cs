@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WebSocketSharp;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 public class WebSocketClient : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class WebSocketClient : MonoBehaviour
         // Set circle color to green when WebSocket is connected
         SetCircleColor(Color.green);
         
-        Invoke(nameof(SendGameStart), 2.5f);
+        // Invoke(nameof(SendGameStart), 2.5f);
     }
 
     private void OnMessage(object sender, MessageEventArgs e)
@@ -95,6 +96,10 @@ public class WebSocketClient : MonoBehaviour
                     _clientId = json["id"];
                     Debug.Log("Set Client ID: " + _clientId);
                     break;
+                case "startGame":
+                    SceneManager.LoadScene("Game");
+                    Debug.Log("Received Start Game message");
+                    break;
                 case "killDuck":
                     Debug.Log("Received killDuck message");
                     GameManager.ShootDuck();
@@ -130,17 +135,17 @@ public class WebSocketClient : MonoBehaviour
         SetCircleColor(_ws.IsAlive ? Color.green : Color.red);
     }
 
-    private void SendGameStart()
-    {
-        Debug.Log("Sending gameStart message to server");
-        var message = new Dictionary<string, string>
-        {
-            { "type", "gameStart" }, { "id", _clientId }
-        };
-        var json = JsonConvert.SerializeObject(message);
-        _ws.Send(json);
-        SocketTransferIndicator();
-    }
+    // private void SendGameStart()
+    // {
+    //     Debug.Log("Sending gameStart message to server");
+    //     var message = new Dictionary<string, string>
+    //     {
+    //         { "type", "startGame" }, { "id", _clientId }
+    //     };
+    //     var json = JsonConvert.SerializeObject(message);
+    //     _ws.Send(json);
+    //     SocketTransferIndicator();
+    // }
 
     private void SendGameEnd()
     {
