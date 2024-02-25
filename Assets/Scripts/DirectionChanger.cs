@@ -9,6 +9,7 @@ public class DirectionChanger : MonoBehaviour
 
     void Start()
     {
+        TurnOn();
         GameManager.OnDuckShot += TurnOff;
         GameManager.OnDuckMiss += TurnOff;
         GameManager.OnSpawnDucks += TurnOn;
