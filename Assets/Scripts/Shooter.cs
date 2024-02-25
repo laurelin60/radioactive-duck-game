@@ -10,10 +10,5 @@ public class Shooter : MonoBehaviour
         {
             GameManager.ShootDuck();
         }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            GameManager.OnSpawnDucks();
-        }
     }
 }
