@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         OnDuckShot += IncrementScore;
         OnDuckShot += IncrementDucks;
         OnSpawnDucks += IncrementDucks;
+        OnFinish += LoadEndScreen;
     }
 
    public void IncrementDucks() 
@@ -64,4 +66,8 @@ public class GameManager : MonoBehaviour
         manager.SetScore(newScore);
    }
 
+    private void LoadEndScreen()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
 }
