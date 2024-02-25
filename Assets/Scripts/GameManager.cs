@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static DuckDel OnDuckMiss;
     public static DuckDel ShootDuck;
     public static DuckDel OnFinish;
+    public static DuckDel OnStartGame;
 
     public GUIManager manager;
 
@@ -25,13 +26,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        OnStartGame();
         score = 0;
-        currentDuck = -1;
+        currentDuck = 0;
 
         SetScore(score);
 
         OnDuckShot += IncrementScore;
-        OnDuckShot += IncrementDucks;
         OnSpawnDucks += IncrementDucks;
         OnFinish += LoadEndScreen;
     }
