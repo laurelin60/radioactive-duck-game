@@ -6,7 +6,8 @@ public class DuckSpawner : MonoBehaviour
 {
     public GameObject Duck;
 
-    public void SpawnDuck() {
-        // Instantiates duck
+    public void SpawnDuck()
+    {
+        Instantiate(Duck, transform.position, transform.rotation);
     }
 }
