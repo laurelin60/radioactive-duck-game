@@ -26,12 +26,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         score = 0;
-        currentDuck = -1;
+        currentDuck = 0;
 
         SetScore(score);
 
         OnDuckShot += IncrementScore;
-        OnDuckShot += IncrementDucks;
         OnSpawnDucks += IncrementDucks;
         OnFinish += LoadEndScreen;
     }
