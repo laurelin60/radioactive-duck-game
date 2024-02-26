@@ -10,7 +10,7 @@ public class GreenFlash : MonoBehaviour
     void Start()
     {
         HideGreen();
-        GameManager.ShootDuck = Flash;
+        GameManager.OnDuckShot = Flash;
     }
 
     public void Flash()
