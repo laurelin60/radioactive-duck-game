@@ -17,3 +17,5 @@
         <img width="1728" alt="Splash" src="https://github.com/laurelin60/radioactive-duck-game/assets/100006999/552d46c3-6f94-49f4-a7eb-2e01efc0d0ba">
 <!--     </a> -->
 </p>
+
+See the web client here: [RDG Web Client](https://github.com/laurelin60/radioactive-duck-game-client)
